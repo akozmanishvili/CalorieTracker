@@ -11,18 +11,23 @@ function App() {
   };
 
   const sum = 0;
-  const totalCalories = foods.reduce((sum, food) => {
-    sum + food.calories;
-  }, 0);
-  const totalProteins = foods.reduce((sum, food) => {
-    sum + food.proteins;
-  }, 0);
+  const totalCalories = foods.reduce(
+    (sum, food) => sum + Number(food.calories),
+    0,
+  );
+  const totalProteins = foods.reduce(
+    (sum, food) => sum + Number(food.proteins),
+    0,
+  );
+
   return (
     <div>
       <h1>Macro Tracker</h1>
       <div>
-        <h4>Calories: {totalCalories} kcal</h4>
-        <h4>Proteins: {totalProteins}g</h4>
+        <h4 style={{ color: totalCalories < 1600 ? "green" : "red" }}>
+          Calories: {totalCalories} kcal
+        </h4>
+        <h4 style={{ color: "green" }}>Proteins: {totalProteins}g</h4>
       </div>
       <FoodForm onAddFood={addFood}></FoodForm>
       <FoodList foods={foods}></FoodList>
